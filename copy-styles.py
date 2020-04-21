@@ -2,9 +2,9 @@
 """
 
 # TODO: copy named styles
-# TODO: copy data validation
 # TODO: Handle alternating styles
 # TODO: copy auxiliary sheets
+# TODO: copy SheetFormatProperties etc.
 
 import argparse
 from copy import copy
@@ -75,6 +75,8 @@ def copy_styles(style_sheet, data_sheet):
 
     data_sheet.auto_filter = style_sheet.auto_filter
     data_sheet.conditional_formatting = style_sheet.conditional_formatting
+    for dv in style_sheet.data_validations.dataValidation:
+        data_sheet.add_data_validation(dv)
 
 
 def main():
