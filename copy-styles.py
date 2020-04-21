@@ -68,16 +68,18 @@ def copy_styles(style_sheet, data_sheet):
 
     data_sheet.freeze_panes = style_sheet.freeze_panes
 
-    for i in range(1, data_sheet.max_row):
-        data_dim = data_sheet.row_dimensions[i]
-        style_dim = style_sheet.row_dimensions[min(i, style_sheet.max_row)]
+    for key, style_dim in style_sheet.row_dimensions.items():
+        data_dim = data_sheet.row_dimensions[key]
         for attr in ROW_ATTRS:
+            if attr == 'height' and getattr(style_dim, attr) == style_sheet.sheet_format.defaultRowHeight:
+                continue
             setattr(data_dim, attr, copy(getattr(style_dim, attr)))
 
-    for i in range(1, data_sheet.max_column):
-        data_dim = data_sheet.column_dimensions[get_column_letter(i)]
-        style_dim = style_sheet.column_dimensions[get_column_letter(min(i, style_sheet.max_column))]
+    for key, style_dim in style_sheet.column_dimensions.items():
+        data_dim = data_sheet.column_dimensions[key]
         for attr in COL_ATTRS:
+            if attr == 'width' and getattr(style_dim, attr) == style_sheet.sheet_format.baseColWidth:
+                continue
             setattr(data_dim, attr, copy(getattr(style_dim, attr)))
 
     data_sheet.auto_filter = style_sheet.auto_filter
