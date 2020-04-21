@@ -21,6 +21,13 @@ COL_ATTRS = CELL_ATTRS + list(set(ColumnDimension.__fields__) - UNSUPPORTED_ATTR
 
 def get_worksheet_for_path(sheet_path):
     if "!" not in sheet_path:
+        if sheet_path.endswith(".csv"):
+            import pandas
+            import tempfile
+            tempf = tempfile.NamedTemporaryFile()
+            with pandas.ExcelWriter(tempf, engine='openpyxl') as writer:
+                pandas.read_csv(sheet_path).to_excel(writer, index=False)
+            sheet_path = tempf
         return load_workbook(sheet_path).worksheets[0]
     path, _, sheet = sheet_path.rpartition("!")
     return load_workbook(path)[sheet]
