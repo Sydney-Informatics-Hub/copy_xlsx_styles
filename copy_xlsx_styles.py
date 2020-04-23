@@ -5,6 +5,7 @@
 # TODO: Handle alternating styles
 # TODO: copy auxiliary sheets
 # TODO: copy SheetFormatProperties etc.
+# TODO: copy row_dimensions and column_dimensions from last row/col to subsequent???
 
 import argparse
 from copy import copy
