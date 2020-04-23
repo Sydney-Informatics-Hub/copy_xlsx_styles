@@ -1,4 +1,4 @@
-"""This copies the styling from one sheet to another.
+"""This copies the styling from one Excel worksheet to another.
 """
 
 # TODO: copy named styles
@@ -14,6 +14,7 @@ from openpyxl import load_workbook
 from openpyxl.worksheet.dimensions import RowDimension, ColumnDimension
 from openpyxl.utils.cell import get_column_letter
 
+__author__ = 'Joel Nothman <joel.nothman@sydney.edu.au>'
 __version__ = '0.1.0.dev0'
 
 UNSUPPORTED_ATTRS = {'style', 'customFormat', 's', 'customHeight', 'customWidth'}
@@ -92,7 +93,7 @@ def copy_styles(style_sheet, data_sheet):
 
 
 def main():
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("style_worksheet", type=get_worksheet_for_path)
     ap.add_argument("data_worksheet", type=get_worksheet_for_path)
     ap.add_argument("output_xlsx")
