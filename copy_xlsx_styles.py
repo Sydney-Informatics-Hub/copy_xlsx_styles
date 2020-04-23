@@ -14,6 +14,8 @@ from openpyxl import load_workbook
 from openpyxl.worksheet.dimensions import RowDimension, ColumnDimension
 from openpyxl.utils.cell import get_column_letter
 
+__version__ = '0.1.0.dev0'
+
 UNSUPPORTED_ATTRS = {'style', 'customFormat', 's', 'customHeight', 'customWidth'}
 CELL_ATTRS = list({'font', 'fill', 'border', 'number_format', 'protection', 'alignment', 'style'} - UNSUPPORTED_ATTRS)
 ROW_ATTRS = CELL_ATTRS + list(set(RowDimension.__fields__) - UNSUPPORTED_ATTRS)
