@@ -60,7 +60,7 @@ def copy_styles(style_sheet, data_sheet):
 
         if data_sheet.max_row > style_sheet.max_row and data_sheet.max_column > style_sheet.max_column:
             style_row, = style_sheet.iter_rows(min_row=max_matched_row, max_col=max_matched_col)
-            style_cell, = style_row
+            style_cell = next(iter(style_row))
             for data_row in data_sheet.iter_rows(min_row=max_matched_row + 1, min_col=max_matched_col + 1):
                 for data_cell in data_row:
                     yield style_cell, data_cell
